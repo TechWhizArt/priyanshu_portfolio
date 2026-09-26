@@ -19,8 +19,8 @@ const NODE_LINE = 0.3 // 节点"终点"参考线：条目顶部到达视口该�
 // 上下渐变背景球（包裹相机），两端颜色可调
 function GradientBackground() {
   // glb 相机视角很窄(~23°)，只看到渐变中间一条；陡度把可见窄带拉伸出完整过渡
-  const top = '#6f906f'
-  const bottom = '#dbd3b5'
+  const top = '#32554f'
+  const bottom = '#627a7c'
   const steep = 1.4
 
   const uniforms = useMemo(
@@ -146,7 +146,7 @@ function Man2({
   }
 
   const get = useThree((s) => s.get)
-  const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}models/me.glb`)
+  const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}models/me2.glb`)
 
   // 克隆模型；收集眼睛对象、聚焦锚点对象、glb 自带相机、各锚点景深开关
   const { model, eyes, points, startPoint, glbCam, focusNode, dof } = useMemo(() => {
@@ -304,13 +304,42 @@ function Man2({
     const els = anchorEls.current
     // 节点停顿：对每段滚动做停顿重映射——靠近某节点的一段滚动里 s 保持不变（停顿），
     // 段中部快速过渡到下一节点。只改"滚动→s"的节奏，glb 动画仍是 s 的线性函数。
-    const d = THREE.MathUtils.clamp(cam.dwell, 0, 0.49)
-    const dwell = (t: number) => {
-      if (d <= 0) return t
-      if (t < d) return 0
-      if (t > 1 - d) return 1
-      return THREE.MathUtils.smoothstep((t - d) / (1 - 2 * d), 0, 1)
-    }
+    // const d = THREE.MathUtils.clamp(cam.dwell, 0, 0.49)
+    // const dwell = (t: number) => {
+    //   if (d <= 0) return t
+    //   if (t < d) return 0
+    //   if (t > 1 - d) return 1
+    //   return THREE.MathUtils.smoothstep((t - d) / (1 - 2 * d), 0, 1)
+    // }
+
+const d = THREE.MathUtils.clamp(cam.dwell, 0, 0.49)
+
+// Extra pause at every focus point before the camera starts rotating
+const extraStop = 0.18
+
+const dwell = (t: number) => {
+  if (d <= 0) return t
+
+  // Initial pause
+  if (t < d) return 0
+
+  // Final pause — camera stays on the current focus frame
+  if (t > 1 - d) return 1
+
+  const normalized = (t - d) / (1 - 2 * d)
+
+  // Additional stationary section before rotation
+  if (normalized < extraStop) return 0
+
+  return THREE.MathUtils.smoothstep(
+    (normalized - extraStop) / (1 - extraStop),
+    0,
+    1
+  )
+}
+
+
+
     let sTarget = THREE.MathUtils.clamp(frameSmooth.current / FRAMES_PER_NODE - 1, -1, M - 1)
     if (els && els.length === M && els.every(Boolean)) {
       // 参考线在视口 NODE_LINE 高度；锚点用条目顶部（文字位置，不含底部大 padding）

@@ -426,8 +426,7 @@ canvas {
   line-height: 1.25;
   color: var(--ink);
 }
-
-/* HOTSAR / 坏打印机 logo：黑色线稿放在米色卡片上，保证可见且保留品牌原色 */
+/* logo for resume items */
 .tl-logo-chip {
   flex: none;
   display: inline-flex;
@@ -435,17 +434,18 @@ canvas {
   justify-content: center;
   width: 40px;
   height: 40px;
-  padding: 5px;
+  padding: 0;
   background: var(--ink);
   border-radius: 9px;
+  overflow: hidden;
 }
 
 .tl-logo-chip img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  display: block;
 }
-
 .tl-role {
   margin-top: 0.35em;
   font-size: 15px;
@@ -496,9 +496,11 @@ canvas {
   height: 36px;
   border-radius: 9px;
   overflow: hidden;
+  
   background: rgba(255, 255, 255, 0.06);
 }
 
+/* content creating logo */
 .tl-group-logo img {
   width: 100%;
   height: 100%;
@@ -518,6 +520,7 @@ canvas {
   display: flex;
   gap: 12px;
   margin-top: 1.4em;
+  
 }
 
 .tl-logo {
@@ -537,6 +540,7 @@ canvas {
 .tl-logo svg {
   width: 20px;
   height: 20px;
+  
 }
 
 .tl-logo:hover {

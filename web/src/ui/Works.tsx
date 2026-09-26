@@ -213,8 +213,8 @@ function WorkDetail({
   )
 }
 
-export default function Works({ lang, innerRef }: { lang: 'en' | 'zh'; innerRef: Ref<HTMLElement> }) {
-  const data = WORKS[lang]
+export default function Works({ innerRef }: { innerRef: Ref<HTMLElement> }) {
+  const data = WORKS
   const sections = data.sections
   const count = sections.length
 
@@ -242,7 +242,7 @@ export default function Works({ lang, innerRef }: { lang: 'en' | 'zh'; innerRef:
       ro.disconnect()
       window.removeEventListener('resize', measure)
     }
-  }, [count, lang])
+  }, [count])
 
   // px 数值插值（比 vw 字符串更顺）；竖滚行程与横移 1:1
   const x = useTransform(scrollYProgress, [0, 1], [0, -scrollRange])
@@ -263,7 +263,7 @@ export default function Works({ lang, innerRef }: { lang: 'en' | 'zh'; innerRef:
   }, [active])
 
   return (
-    <section className="works" lang={lang} ref={innerRef}>
+    <section className="works" ref={innerRef}>
       <div
         className="wk-gallery"
         ref={galleryRef}

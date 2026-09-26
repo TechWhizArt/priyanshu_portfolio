@@ -1,40 +1,75 @@
+
 import type { SVGProps } from 'react'
 
-// 简化的单色平台图标（currentColor），契合深色画面。
-// 如需官方多彩 logo，替换对应 path 即可。
+// Simple monochrome social icons using currentColor.
+// These are designed to work with the dark 3D portfolio theme.
 
-export function DouyinIcon(props: SVGProps<SVGSVGElement>) {
-  // 音符 + 旗 —— 抖音的标志性符号
+export function YouTubeIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <path d="M13 3h3a5 5 0 0 0 4.6 4.98V11A8 8 0 0 1 16 9.6V15a6 6 0 1 1-6-6c.34 0 .67.03 1 .08v3.12A3 3 0 1 0 13 15V3z" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.8V8.2l6.5 3.8-6.5 3.8Z" />
     </svg>
   )
 }
 
-export function BilibiliIcon(props: SVGProps<SVGSVGElement>) {
-  // 电视机 + 两根天线
+export function InstagramIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <path d="M7 3l3 3M17 3l-3 3" />
-      <rect x="3" y="6" width="18" height="13" rx="3.5" />
-      <path d="M9 11v2M15 11v2" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
     </svg>
   )
 }
 
-export function XiaohongshuIcon(props: SVGProps<SVGSVGElement>) {
-  // 圆角方块 + 爱心
+export function ArtStationIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="2" />
-      <path d="M12 16.2c-2.1-1.5-4-3-4-5.1A2.1 2.1 0 0 1 12 9.9a2.1 2.1 0 0 1 4 1.2c0 2.1-1.9 3.6-4 5.1z" fill="currentColor" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M12.2 4.2L20.8 19H16.9l-2.1-3.7H7.1L5 19H1.2L9.8 4.2c.5-.8 1.1-1.2 2.4-1.2s1.9.4 2.4 1.2zM9 12.3h4.1L11 8.7 9 12.3z" />
+    </svg>
+  )
+}
+
+export function EmailIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M3 7l9 6 9-6" />
     </svg>
   )
 }
 
 export const SOCIAL_ICONS = {
-  douyin: DouyinIcon,
-  bilibili: BilibiliIcon,
-  xiaohongshu: XiaohongshuIcon,
+  youtube: YouTubeIcon,
+  instagram: InstagramIcon,
+  artstation: ArtStationIcon,
+  email: EmailIcon,
 }

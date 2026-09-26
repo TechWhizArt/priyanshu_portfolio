@@ -20,25 +20,19 @@ function Backdrop() {
   )
 }
 
-type Lang = 'en' | 'zh'
 
 const COPY = {
-  en: {
-    title: 'About Sen',
+  
+    title: 'About Priyanshu Yadav',
     paragraphs: [
-      "I'm Sen — a creative technologist living where code meets art. I spend my days around coding, creativity, playful interaction & design, and CG work. I love studying and combining skills across different fields — to create, and to explore more possibilities.",
+      "I'm Priyanshu, a 21-year-old artist and filmmaker based in Mumbai, India. I work across graphic design, 3D, VFX, editing, and visual storytelling. I love exploring different mediums, combining art and technology to turn ideas into visuals and stories.",
     ],
-  },
-  zh: {
-    title: 'About Sen',
-    paragraphs: [
-      '我是 Sen——一个游走在代码与艺术之间的创意技术人。我常年和 Coding、创意、有趣的交互 & 设计、CG 创作等打交道，喜欢研究并组合不同领域的技能，来创造并探索更多可能性。',
-    ],
-  },
+  
+  
 }
 
-function Hero({ lang, cueOpacity }: { lang: Lang; cueOpacity: MotionValue<number> }) {
-  const { title, paragraphs } = COPY[lang]
+function Hero({ cueOpacity }: {cueOpacity: MotionValue<number> }) {
+  const { title, paragraphs } = COPY
   const aboutRef = useRef(null)
   // 触发起点提前：about 顶部位于视口 60% 处即开始（offset[0] 进度 0），到达顶部为进度 1
   const { scrollYProgress } = useScroll({
@@ -57,7 +51,6 @@ function Hero({ lang, cueOpacity }: { lang: Lang; cueOpacity: MotionValue<number
     <section className="hero">
       <motion.div
         className="about"
-        lang={lang}
         ref={aboutRef}
         style={{ filter: blur, opacity }}
       >
@@ -74,7 +67,7 @@ function Hero({ lang, cueOpacity }: { lang: Lang; cueOpacity: MotionValue<number
         </div>
       </motion.div>
       <motion.div className="scroll-cue" style={{ opacity: cueOpacity }} aria-hidden="true">
-        <span className="scroll-cue-label">{lang === 'en' ? 'SCROLL' : '向下滚动'}</span>
+        <span className="scroll-cue-label">SCROLL</span>
         <span className="scroll-cue-track">
           <span className="scroll-cue-dot" />
         </span>
@@ -82,19 +75,18 @@ function Hero({ lang, cueOpacity }: { lang: Lang; cueOpacity: MotionValue<number
     </section>
   )
 }
-
-function LangToggle({ lang, onToggle }: { lang: Lang; onToggle: () => void }) {
-  return (
-    <button className="lang-toggle" onClick={onToggle} aria-label="切换语言 / Switch language">
-      {lang === 'en' ? '中文' : 'EN'}
-    </button>
-  )
-}
+//language change button functioning
+// function LangToggle({ lang, onToggle }: { lang: Lang; onToggle: () => void }) {
+//   return (
+//     <button className="lang-toggle" onClick={onToggle} aria-label="切换语言 / Switch language">
+//       {lang === 'en' ? '中文' : 'EN'}
+//     </button>
+//   )
+// }
 
 export default function App() {
-  const [lang, setLang] = useState<Lang>('zh')
+
   const { scrollY } = useScroll()
-  // 作品区蒙层：以作品区顶部从视口底进入到视口中部的进度，驱动 3D 渐暗 + 模糊
   const worksRef = useRef(null)
   const { scrollYProgress: worksProgress } = useScroll({
     target: worksRef,
@@ -159,7 +151,6 @@ export default function App() {
         aria-hidden="true"
       /> */}
 
-      {/* 中英切换暂时隐藏，默认中文 */}
       {/* <LangToggle lang={lang} onToggle={() => setLang((l) => (l === 'en' ? 'zh' : 'en'))} /> */}
 
       {/* 首屏装饰：发丝内框 + 四角定位标 + 角标元数据（随滚动淡出） */}
@@ -170,12 +161,12 @@ export default function App() {
         <span className="hero-mark bl">+</span>
         <span className="hero-mark br">+</span>
         <div className="hero-meta hm-tl">
-          <span className="hm-name">Sen Zheng 郑越升</span>
-          <span>Creative Technologist</span>
+          <span className="hm-name">Priyanshu Yadav</span>
+          <span>3D Artist | Designer | Editor</span>
         </div>
         <div className="hero-meta hm-tr">Portfolio — 2026</div>
         <div className="hero-meta hm-bl">Code · Art · Play</div>
-        <div className="hero-meta hm-right">Based in Shenzhen</div>
+        <div className="hero-meta hm-right">Based in Mumbai</div>
       </motion.div>
 
       {/* 全屏胶片噪点蒙层（multiply 混合） */}
@@ -183,10 +174,11 @@ export default function App() {
 
       {/* 可滚动内容 */}
       <main className="content">
-        <Hero lang={lang} cueOpacity={cueOpacity} />
-        <Resume lang={lang} />
-        <Works lang={lang} innerRef={worksRef} />
+        <Hero  cueOpacity={cueOpacity} />
+        <Resume />
+        <Works  innerRef={worksRef} />
       </main>
     </>
   )
 }
+
